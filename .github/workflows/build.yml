@@ -19,11 +19,11 @@ jobs:
       - name: download
         run: |
           curl -L -o torch_cpu.zip https://github.com/ahaoboy/torch-portable/releases/latest/download/torch_cpu.zip
-          7z x torch_cpu.zip
+          7z x torch_cpu.zip -y
 
       - name: run
         run: |
-          ./torch_cpu/run_cpu.bat
+          ./run_cpu.bat
 
 
   test-windows-gpu:

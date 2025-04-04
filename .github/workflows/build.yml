@@ -25,6 +25,9 @@ jobs:
         run: |
           ls
 
+          which python
+
+          cat  ./run.bat
           # ./run_cpu.bat
           ./run.bat
 

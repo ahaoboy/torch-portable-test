@@ -27,10 +27,9 @@ jobs:
 
           which python
 
-          cat  ./run.bat
-          # ./run_cpu.bat
-          ./run.bat
-
+          cat  ./run_cpu.bat
+          ./run_cpu.bat
+          # ./run.bat
 
   test-windows-gpu:
     if: false

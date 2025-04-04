@@ -25,7 +25,8 @@ jobs:
         run: |
           ls
 
-          ./run_cpu.bat
+          # ./run_cpu.bat
+          ./run.bat
 
 
   test-windows-gpu:

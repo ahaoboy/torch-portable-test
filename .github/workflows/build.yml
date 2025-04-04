@@ -24,15 +24,10 @@ jobs:
       - name: run
         run: |
           ls
-
-          which python
-
           cat  ./run_cpu.bat
           ./run_cpu.bat
-          # ./run.bat
 
   test-windows-gpu:
-    if: false
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -60,5 +55,7 @@ jobs:
           7z x torch_gpu.zip
       - name: run
         run: |
-          ./torch_gpu/run_gpu.bat
+          ls
+          cat ./run_gpu.bat
+          ./run_gpu.bat
 

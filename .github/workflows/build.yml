@@ -1,0 +1,58 @@
+name: build
+
+permissions:
+  contents: write
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  test-windows-cpu:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4\
+      - name: download
+        run: |
+          curl -L -o torch_cpu.zip https://github.com/ahaoboy/torch-portable/releases/latest/download/torch_cpu.zip
+          7z x torch_cpu.zip
+
+      - name: run
+        run: |
+          ./torch_cpu/run_cpu.bat
+
+
+  test-windows-gpu:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+
+      - name: winget
+        run: |
+          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+          scoop install main/winget -g
+          winget install Microsoft.VisualStudio.2022.BuildTools --force --accept-package-agreements --accept-source-agreements
+          winget install Microsoft.VisualStudio.2022.Community --override "--quiet --add Microsoft.VisualStudio.Workload.NativeDesktop" --force --accept-package-agreements --accept-source-agreements
+
+      - name: Install CUDA
+        uses: Jimver/cuda-toolkit@master
+        with:
+          cuda: "12.1.0"
+
+      - name: download
+        run: |
+          curl -L -o torch_gpu.zip https://github.com/ahaoboy/torch-portable/releases/latest/download/torch_gpu.zip
+          7z x torch_gpu.zip
+      - name: run
+        run: |
+          ./torch_gpu/run_gpu.bat
+

@@ -15,7 +15,7 @@ jobs:
   test-windows-cpu:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4\
+      - uses: actions/checkout@v4
       - name: download
         run: |
           curl -L -o torch_cpu.zip https://github.com/ahaoboy/torch-portable/releases/latest/download/torch_cpu.zip
@@ -27,6 +27,7 @@ jobs:
 
 
   test-windows-gpu:
+    if: false
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4

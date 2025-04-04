@@ -23,6 +23,8 @@ jobs:
 
       - name: run
         run: |
+          ls
+
           ./run_cpu.bat
 
 

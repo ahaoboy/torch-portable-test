@@ -51,8 +51,9 @@ jobs:
 
       - name: download
         run: |
-          curl -L -o torch_gpu.zip https://github.com/ahaoboy/torch-portable/releases/latest/download/torch_gpu.zip
-          7z x torch_gpu.zip
+          curl -L -o torch_gpu.zip.001 https://github.com/ahaoboy/torch-portable/releases/latest/download/torch_gpu.zip.001
+          curl -L -o torch_gpu.zip.002 https://github.com/ahaoboy/torch-portable/releases/latest/download/torch_gpu.zip.002
+          7z x torch_gpu.zip.001
       - name: run
         run: |
           ls
